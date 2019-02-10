@@ -10,6 +10,7 @@
 namespace App\Repositories;
 
 use App\User;
+use Illuminate\Support\Facades\Cache;
 
 class TaskRepository
 {
@@ -21,9 +22,14 @@ class TaskRepository
      */
     public function forUser(User $user)
     {
-        return $user->tasks()
-            ->orderBy('created_at', 'asc')
-            ->get();
+        $count = $user->tasks()->count();
+        $tasks = Cache::tags('count'.$count)->remember('task', 200, function () use ($user){
+            return $user->tasks()
+                ->orderBy('created_at', 'asc')
+                ->get();
+        });
+
+        return $tasks;
     }
 
 }
