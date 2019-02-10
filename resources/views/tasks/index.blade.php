@@ -78,4 +78,22 @@
             </div>
         </div>
     @endif
+
+    {!! grid([
+        'dataProvider' => $dataProvider,
+        'rowsPerPage' => 20,
+        'columns' => [
+            'name',
+            [
+                'class' => 'actions',
+                'value' => '{delete}',
+                'actionsUrls' => function($model) {
+                    return [
+                        'delete' => url('task/'.$model->id)
+                    ];
+                }
+            ]
+        ]
+    ])->render() !!}
+
 @endsection

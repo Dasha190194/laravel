@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Woo\GridView\GridViewServiceProvider::class,
         //
 
         /*
