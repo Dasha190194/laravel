@@ -1,3 +1,5 @@
+<!-- resources/views/tasks/index.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
@@ -6,7 +8,7 @@
 
     <div class="panel-body">
         <!-- Отображение ошибок проверки ввода -->
-    {{--@include('common.errors')--}}
+    @include('common.errors')
 
     <!-- Форма новой задачи -->
         <form action="{{ url('task') }}" method="POST" class="form-horizontal">
@@ -32,6 +34,7 @@
         </form>
     </div>
 
+    <!-- Текущие задачи -->
     @if (count($tasks) > 0)
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -57,7 +60,16 @@
                             </td>
 
                             <td>
-                                <!-- TODO: Кнопка Удалить -->
+                            <td>
+                                <form action="{{ url('task/'.$task->id) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+
+                                    <button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-danger">
+                                        <i class="fa fa-btn fa-trash"></i>Удалить
+                                    </button>
+                                </form>
+                            </td>
                             </td>
                         </tr>
                     @endforeach
