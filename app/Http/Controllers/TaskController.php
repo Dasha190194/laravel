@@ -26,7 +26,6 @@ class TaskController extends Controller
     public function __construct(TaskRepository $tasks)
     {
         $this->middleware('auth');
-
         $this->tasks = $tasks;
     }
 
@@ -66,8 +65,9 @@ class TaskController extends Controller
      * @param  Task  $task
      * @return Response
      */
-    public function destroy(Request $request, Task $task)
+    public function destroy(Request $request, $id)
     {
+        $task = Task::find($id);
         $this->authorize('destroy', $task);
         $task->delete();
 
@@ -76,5 +76,9 @@ class TaskController extends Controller
 
     public function show(Request $request, Task $task) {
        return view('tasks.show', ['task' => $task]);
+    }
+
+    public function find(Request $request, $id) {
+        $task = Task::findOrFail($id);
     }
 }

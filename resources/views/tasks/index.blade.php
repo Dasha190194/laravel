@@ -70,7 +70,10 @@
                                     </button>
                                 </form>
                             </td>
-                            </td>;
+                            </td>
+                            <td>
+                                <a href="{{ url('task/find/'.$task->id) }}">НАЙТИ</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -89,7 +92,7 @@
                 'value' => '{show} {delete}',
                 'actionsUrls' => function($model) {
                     return [
-                        'show' => url('task/'.$model->name),
+                        'show' => url('task/show/'.$model->name),
                         'delete' => url('task/'.$model->id)
                     ];
                 }
