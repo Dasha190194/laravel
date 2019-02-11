@@ -9,6 +9,11 @@ class Task extends Model
 
     protected $fillable = ['name'];
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

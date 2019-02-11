@@ -70,7 +70,7 @@
                                     </button>
                                 </form>
                             </td>
-                            </td>
+                            </td>;
                         </tr>
                     @endforeach
                     </tbody>
@@ -86,14 +86,17 @@
             'name',
             [
                 'class' => 'actions',
-                'value' => '{delete}',
+                'value' => '{show} {delete}',
                 'actionsUrls' => function($model) {
                     return [
+                        'show' => url('task/'.$model->name),
                         'delete' => url('task/'.$model->id)
                     ];
                 }
             ]
         ]
     ])->render() !!}
+
+    {{--{{$tasksFromCache}}--}}
 
 @endsection
