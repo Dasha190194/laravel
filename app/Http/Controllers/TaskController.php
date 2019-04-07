@@ -25,7 +25,7 @@ class TaskController extends Controller
      */
     public function __construct(TaskRepository $tasks)
     {
-        $this->middleware('auth');
+       // $this->middleware('auth');
         $this->tasks = $tasks;
     }
 
